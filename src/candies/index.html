@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<%- include('../_partials/head.ejs') %>
+<body>
+<%- include('../_partials/header.ejs', { title: "Our delicious candies 🍭" }) %>
+<main>
+<%- include('../_partials/gallery.ejs', { images: gallery.candies }) %>
+</main>
+<%- include('../_partials/footer.ejs') %>
+</body>
+</html>

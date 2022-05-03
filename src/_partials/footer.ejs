@@ -1,0 +1,10 @@
+<footer>
+<p>A <a href="https://developers.cloudflare.com/images/cloudflare-images/">Cloudflare Images</a> Tutorial Website powered by <a href="https://developers.cloudflare.com/pages/">Cloudflare Pages</a></p>
+<p><a href="https://developers.cloudflare.com/images/cloudflare-images/tutorials/cloudflare-images-on-pages">Check out the tutorial this website is about</a></p>
+<p>Tutorial steps:
+    <% steps.forEach(function(step) { %>
+        <a href="<%= step.path %>/<%= pagePath %>"><%= step.name %></a>, 
+    <% }); %>
+</p>
+<p><a href="<%= step.path %>/images-credits">Images Credits</a></p>
+</footer>

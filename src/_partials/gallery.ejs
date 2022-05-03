@@ -1,0 +1,39 @@
+<div id="gallery">
+    <% images.forEach(function(image) { %>
+    <div class="gallery-cell" style="background-image: url(<%= step.image_url(image, 'thumb') %>);">
+        <img src="<%= step.image_url(image, 'public') %>" class="full">
+    </div>
+    <% }); %>
+</div>
+
+<div id="fullimg">
+    <em></em>
+    <img />
+    <a href="#">Close</a>
+</div>
+
+<script>
+    (function () {
+        const openFull = (cell) => {
+            const full_img = cell.querySelector("img.full");
+            document.querySelector("#gallery").style.display = "none";
+            document.querySelector("#fullimg img").src = full_img.src;
+            document.querySelector("#fullimg em").innerHTML = '<a href="' + full_img.src + '" target="_blank">' + decodeURI(full_img.src) + '</a>';
+            document.querySelector("#fullimg").style.display = "block";
+            console.log(full_img);
+        };
+
+        const closeFull = () => {
+            document.querySelector("#fullimg").style.display = "none";
+            document.querySelector("#gallery").style.display = "block";
+        }
+
+        document.querySelectorAll("#gallery .gallery-cell").forEach(img => {
+            img.addEventListener("click", () => openFull(img));
+        });
+
+        document.querySelectorAll("#fullimg a, #fullimg img").forEach(o => {
+            o.addEventListener("click", () => closeFull());
+        });
+    })();
+</script>

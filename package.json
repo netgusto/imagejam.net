@@ -1,0 +1,23 @@
+{
+  "name": "imagejam.net",
+  "version": "1.0.0",
+  "description": "",
+  "main": "scripts/index.js",
+  "scripts": {
+    "generate": "node scripts/generate.js",
+    "serve": "npm run generate; npm exec http-server -- dist/",
+    "bulkupload": "node scripts/migrate/bulkupload.js",
+    "reset": "node scripts/migrate/reset.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.7",
+    "form-data": "^4.0.0",
+    "fs-extra": "^10.1.0",
+    "glob": "^8.0.1",
+    "http-server": "^14.1.0",
+    "node-fetch": "^2.6.7",
+    "p-limit": "^3.1.0"
+  }
+}
