@@ -17,7 +17,7 @@
     (function () {
         const img = document.querySelector("#fullimg img");
         img.addEventListener("load", function() {
-            document.querySelector("#fullimg .details").innerHTML = "Natural size: " + img.naturalWidth + "x" + img.naturalHeight + "; display size: " + img.clientWidth + "x" + img.clientHeight;
+            document.querySelector("#fullimg .details").innerHTML = "Real size: " + img.naturalWidth + "x" + img.naturalHeight + "; display size: " + img.clientWidth + "x" + img.clientHeight;
         });
 
         const openFull = (cell) => {
