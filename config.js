@@ -6,7 +6,7 @@ module.exports = {
 
     // This is where your origin images are stored
     // We use this to get images during the migration
-    image_origin_baseurl: "https://imagejam.s3.amazonaws.com/",
+    image_origin_url: "https://imagejam.s3.amazonaws.com/",
 
     // This is the Images account Hash you'll find in your Cloudflare Images Dashboard
     // It is safe to disclose publicly, as this is not a secret value.
