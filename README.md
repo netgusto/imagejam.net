@@ -10,9 +10,9 @@ This website illustrates several steps in the progression of the tutorial.
 
 👉 The only difference in every step: **the URLs to the website images** 👈
 
-Step 1 shows a website not using Cloudflare Images,  
-Step 2 and 3 change the images URLs to leverage Cloudflare Images,  
-and Step 4 show how Cloudflare Images can be fully integrated without having to change any existing image URL.  
+Step 1 serves unoptimized images on their original URLs (not using Cloudflare Images),  
+Step 2 and 3 serves Cloudflare Images on their Cloudflare Images URLs, and  
+Step 4 serves Cloudflare Images on their original URLs, demonstrating that a full integration can be done without changing anything on the website.
 
 ### Step 1: no Cloudflare Images
 
