@@ -22,10 +22,6 @@ main {
     padding: 20px;
 }
 
-header h2 {
-    padding: 50px 0 20px 0;
-}
-
 a {
     color: inherit;
     text-decoration: underline;
@@ -66,7 +62,7 @@ a {
     padding-bottom: 20px;
 }
 
-#gallery img.full {
+#gallery img.large {
     display: none;
 }
 
