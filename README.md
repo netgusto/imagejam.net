@@ -14,11 +14,11 @@ Step 1 serves unoptimized images on their original URLs (not using Cloudflare Im
 Step 2 and 3 serves Cloudflare Images on their Cloudflare Images URLs, and  
 Step 4 serves Cloudflare Images on their original URLs, **demonstrating that a full integration can be done without changing anything on the website.**
 
-### Step 1: no Cloudflare Images
+### Step 1: no Cloudflare Images 🙈
 
 Live at <https://imagejam.net/step-1/>
 
-Presents a website serving unoptimized images (without using Cloudflare Images 🙈).
+Presents a website serving unoptimized images (without using Cloudflare Images).
 
 👉 We use this as a basis for the integration of Cloudflare Images in the following step.
 
