@@ -6,9 +6,9 @@ See the Cloudflare Pages website running at <https://imagejam.net>.
 
 ## Tutorial Steps
 
-This website illustrates several steps in the progression of the tutorial. Follow along on the corresponding [Cloudflare Images tutorial](https://developers.cloudflare.com/images/cloudflare-images/tutorials/cloudflare-images-on-pages).
+This website illustrates several steps in the progression of the tutorial.
 
-All steps are the same, with only one difference: the URLs of the images.
+👉 All steps produce the same website, with only one difference: **the URLs to the website images** 👈
 
 ### Step 1: no Cloudflare Images
 
@@ -46,7 +46,7 @@ Live at <https://imagejam.net/step-3/>
 
 Presents a website serving images from Cloudflare Images, keeping the Images on their unchanged existing URL.
 
-👉 Demonstrates how low profile the integration of Cloudflare Images can be in your system, requiring zero change in the HTML of your existing website.
+👉 Demonstrates how low profile the integration of Cloudflare Images can be in your system, requiring zero change in the HTML of your existing website and in the URLs of your existing images.
 
 👉 This is achieved by a simple Cloudflare Worker that relays image trafic to Cloudflare Images. See the source code for this worker in [`/images-worker`](https://github.com/netgusto/imagejam.net/tree/production/images-worker) on this repo.
 
