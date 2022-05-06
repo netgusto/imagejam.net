@@ -12,7 +12,7 @@ This website illustrates several steps in the progression of the tutorial.
 
 Step 1 serves unoptimized images on their original URLs (not using Cloudflare Images),  
 Step 2 and 3 serves Cloudflare Images on their Cloudflare Images URLs, and  
-Step 4 serves Cloudflare Images on their original URLs, demonstrating that a full integration can be done without changing anything on the website.
+Step 4 serves Cloudflare Images on their original URLs, **demonstrating that a full integration can be done without changing anything on the website.**
 
 ### Step 1: no Cloudflare Images
 
