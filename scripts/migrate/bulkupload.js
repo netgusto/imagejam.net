@@ -31,7 +31,7 @@ async function bulkUpload() {
                 // Upload image to Cloudflare Images
                 // CF Images will download the image hosted at the provided URL and store it
                 const body = new FormData();
-                body.append("url", config.image_s3_baseurl + image_name);
+                body.append("url", config.image_origin_baseurl + image_name);
                 body.append("id", image_name);
 
                 try {

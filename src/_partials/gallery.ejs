@@ -1,7 +1,7 @@
 <div id="gallery">
     <% images.forEach(function(image) { %>
-    <div class="gallery-cell" style="background-image: url(<%= step.image_url(image, 'thumb') %>);">
-        <img src="<%= step.image_url(image, 'public') %>" class="full">
+    <div class="gallery-cell" style="background-image: url(<%= step.image_url(image, 'thumb', config) %>);">
+        <img src="<%= step.image_url(image, 'public', config) %>" class="full">
     </div>
     <% }); %>
 </div>

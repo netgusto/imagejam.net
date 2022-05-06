@@ -2,40 +2,47 @@ module.exports = {
     src_dir: "./src",
     dist_dir: "./dist",
     site_name: "Image Jam",
-    site_url: "https://imagejam.net/",
-    image_s3_baseurl: "https://imagejam.s3.amazonaws.com/",
+    site_url: "https://imagejam.net",
+
+    // This is where your origin images are stored
+    // We use this to get images during the migration
+    image_origin_baseurl: "https://imagejam.s3.amazonaws.com/",
+
+    // This is the Images account Hash you'll find in your Cloudflare Images Dashboard
+    // It is safe to disclose publicly, as this is not a secret value.
+    cloudflare_images_account_hash: "-oMiRxTrr3JCvTMIzx4GvA",
 
     steps: [
         {
             name: "Step 1",
             path: "/step-1",
             description: "Serve images without Cloudflare Images 🙈",
-            image_url: function(image_name, variant) {
-                return "https://imagejam.net/images/" + variant + "/" + image_name + "?use_cf_images=0";
+            image_url: function(image_name, variant, config) {
+                return config.site_url + "/images/" + variant + "/" + image_name;
             }
         },
         {
             name: "Step 2",
             path: "/step-2",
             description: "Use Cloudflare Images on default delivery domain",
-            image_url: function(image_name, variant) {
-                return "https://imagedelivery.net/-oMiRxTrr3JCvTMIzx4GvA/" + image_name + "/" + variant;
+            image_url: function(image_name, variant, config) {
+                return "https://imagedelivery.net/" + config.cloudflare_images_account_hash + "/" + image_name + "/" + variant;
             }
         },
         {
             name: "Step 3",
             path: "/step-3",
             description: "Use Cloudflare Images on a custom delivery domain",
-            image_url: function(image_name, variant) {
-                return "https://imagejam.net/cdn-cgi/imagedelivery/-oMiRxTrr3JCvTMIzx4GvA/" + image_name + "/" + variant;
+            image_url: function(image_name, variant, config) {
+                return config.site_url + "/cdn-cgi/imagedelivery/" + config.cloudflare_images_account_hash + "/" + image_name + "/" + variant;
             }
         },
         {
             name: "Step 4",
             path: "/step-4",
             description: "Use Cloudflare Images without changing your current images URL",
-            image_url: function(image_name, variant) {
-                return "https://imagejam.net/images/" + variant + "/" + image_name + "?use_cf_images=1";
+            image_url: function(image_name, variant, config) {
+                return config.site_url + "/images/" + variant + "/" + image_name + "?use_cf_images=1";
             }
         },
     ],

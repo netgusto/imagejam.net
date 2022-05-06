@@ -2,7 +2,7 @@ name = "images-worker"
 type = "javascript"
 
 account_id = ""
-workers_dev = true
+workers_dev = false
 route = ""
 zone_id = ""
 compatibility_date = "2022-05-05"

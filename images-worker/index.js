@@ -7,16 +7,17 @@ addEventListener('fetch', event => {
  * @param {Request} request
  */
 
-// This is the Images account Hash you'll find in your Cloudflare Images Dashboard
-// It is safe to disclose publicly, as this is not a secret value.
-const CLOUDFLARE_IMAGES_ACCOUNT_HASH = "-oMiRxTrr3JCvTMIzx4GvA";
+const config = {
+  // This is the Images account Hash you'll find in your Cloudflare Images Dashboard
+  // It is safe to disclose publicly, as this is not a secret value.
+  cloudflare_images_account_hash: "-oMiRxTrr3JCvTMIzx4GvA",
+
+  // This is where your origin images are stored
+  image_origin_baseurl: "https://imagejam.s3.amazonaws.com/",
+}
 
 async function handleRequest(request) {
   const url = new URL(request.url);
-
-  if (!url.searchParams.has("use_cf_images")) {
-    return notFound();
-  }
 
   const use_cf_images = parseInt(url.searchParams.get("use_cf_images")) === 1;
   const { variant, imageName } = extractVariant(url);
@@ -27,12 +28,12 @@ async function handleRequest(request) {
 
   if (use_cf_images) {
     // Use Cloudflare Images to deliver image ✨
-    return fetch("https://imagedelivery.net/" + CLOUDFLARE_IMAGES_ACCOUNT_HASH + "/" + imageName + "/" + variant);
+    return fetch("https://imagedelivery.net/" + config.cloudflare_images_account_hash + "/" + imageName + "/" + variant);
   }
 
   // Don't use Cloudflare Images 🙈
   // corresponds to a website not (yet!) using Cloudflare Images
-  return fetch("https://imagejam.s3.amazonaws.com/" + imageName); 
+  return fetch(config.image_origin_baseurl + imageName); 
 }
 
 function extractVariant(url) {

@@ -18,7 +18,7 @@ Presents a website serving images without using Cloudflare Images 🙈
 
 👉 We use this step as a basis for the integration of Cloudflare Images.
 
-Images URLs look like: https://imagejam.net/images/public/cakes/aditya-joshi--DUN-_bTO2Q-unsplash-ツ.jpg
+Image URLs look like: https://imagejam.net/images/public/cakes/aliet-kitchen-qrDbj7OV2EU-unsplash-ツ.jpg
 
 ### Step 2: Cloudflare Images width default delivery domain
 
@@ -28,11 +28,27 @@ Presents a website serving images from Cloudflare Images, on the default deliver
 
 👉 This step and the following suppose that the images used by the website have been imported on Cloudflare Images; see [migration](#Migration) about this
 
-### Step 3: Cloudflare Images width custom delivery domain
+Image URLs look like: https://imagedelivery.net/-oMiRxTrr3JCvTMIzx4GvA/cakes/aliet-kitchen-qrDbj7OV2EU-unsplash-ツ.jpg/public
+
+### Step 3: Cloudflare Images with custom delivery domain
 
 Live at <https://imagejam.net/step-3/>
 
 Presents a website serving images from Cloudflare Images on a custom delivery domain.
+
+👉 Demonstrates how one can serve Cloudflare Images on their own donmain with zero setup.
+
+Image URLs look like: https://imagejam.net/cdn-cgi/imagedelivery/-oMiRxTrr3JCvTMIzx4GvA/cakes/aliet-kitchen-qrDbj7OV2EU-unsplash-ツ.jpg/public
+
+### Step 4: Cloudflare Images on existing Images URL
+
+Live at <https://imagejam.net/step-3/>
+
+Presents a website serving images from Cloudflare Images, keeping the Images on their unchanged existing URL.
+
+👉 Demonstrates how low profile the integration of Cloudflare Images can be in your system, requiring zero change in the HTML of your existing website.
+
+👉 This is achieved by a simple Cloudflare Worker that relays image trafic to Cloudflare Images. See the source code for this worker in [`/images-worker`](https://github.com/netgusto/imagejam.net/tree/production/images-worker) on this repo.
 
 ## Migrating the website Images to Cloudflare Images
 
@@ -63,8 +79,6 @@ npm run serve
 ```
 
 Then open <http://127.0.0.1:8080> in your browser.
-
-
 
 ### DRAFT
 

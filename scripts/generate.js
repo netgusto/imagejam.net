@@ -28,7 +28,7 @@ function generate_step(config, srcDir, destDir, stepConfig) {
         const absFile = path.join(stepDestDir, filename);
         ejs.renderFile(
             absFile,
-            { ...config, step: stepConfig, pagePath: path.dirname(filename) },
+            { config, step: stepConfig, pagePath: path.dirname(filename) },
             (err, str) => {
                 stopIfError(err);
                 fs.writeFileSync(absFile, str);
