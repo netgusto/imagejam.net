@@ -52,7 +52,7 @@ Presents a website serving images from Cloudflare Images, keeping the Images on 
 
 👉 Demonstrates how low profile the integration of Cloudflare Images can be in your system, requiring zero change in the HTML of your existing website and in the URLs of your existing images.
 
-👉 This is achieved by a simple Cloudflare Worker that relays image trafic to Cloudflare Images. See the source code for this worker in [`/images-worker`](https://github.com/netgusto/imagejam.net/tree/production/images-worker) on this repo.
+👉 This is achieved by a simple Cloudflare Worker that relays image trafic to Cloudflare Images. See the source code for this worker in [`/images-worker`](https://github.com/netgusto/imagejam.net/tree/production/images-worker/index.js) on this repo.
 
 Image URLs look like: https://imagejam.net/images/public/cakes/aliet-kitchen-qrDbj7OV2EU-unsplash-ツ.jpg
 
