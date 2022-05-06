@@ -10,6 +10,12 @@ const readLineAsync = function(message) {
     });
 };
 
+const exit = function(msg) {
+    console.error(msg);
+    process.exit(1);
+}
+
 module.exports = {
     readLineAsync,
+    exit,
 };

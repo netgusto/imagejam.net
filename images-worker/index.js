@@ -21,7 +21,7 @@ async function handleRequest(request) {
     return notFound();
   }
 
-  if (parseInt(url.searchParams.get("use_cf_images")) === 0) {
+  if (!url.searchParams.has("use_cf_images") || parseInt(url.searchParams.get("use_cf_images")) === 0) {
     // Don't use Cloudflare Images 🙈 and serve directly from S3.
     // Corresponds to a website not (yet!) using Cloudflare Images
     //
