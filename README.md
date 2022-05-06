@@ -8,7 +8,11 @@ See the Cloudflare Pages website running at <https://imagejam.net>.
 
 This website illustrates several steps in the progression of the tutorial.
 
-👉 All steps produce the same website, with only one difference: **the URLs to the website images** 👈
+👉 The only difference in every step: **the URLs to the website images** 👈
+
+Step 1 shows a website not using Cloudflare Images,  
+Step 2 and 3 change the images URLs to leverage Cloudflare Images,  
+and Step 4 show how Cloudflare Images can be fully integrated without having to change any existing image URL.  
 
 ### Step 1: no Cloudflare Images
 
