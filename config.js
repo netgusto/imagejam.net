@@ -16,7 +16,7 @@ module.exports = {
         {
             name: "Step 1",
             path: "/step-1",
-            description: "Serve images without Cloudflare Images 🙈",
+            description: "Serve unoptimized images without Cloudflare Images 🙈",
             image_url: function(image_name, variant, config) {
                 return config.site_url + "/images/" + variant + "/" + image_name + "?use_cf_images=0";
             }
@@ -24,7 +24,7 @@ module.exports = {
         {
             name: "Step 2",
             path: "/step-2",
-            description: "Use Cloudflare Images on default delivery domain",
+            description: "Serve Cloudflare Images on default delivery domain",
             image_url: function(image_name, variant, config) {
                 return "https://imagedelivery.net/" + config.cloudflare_images_account_hash + "/" + image_name + "/" + variant;
             }
@@ -32,7 +32,7 @@ module.exports = {
         {
             name: "Step 3",
             path: "/step-3",
-            description: "Use Cloudflare Images on a custom delivery domain",
+            description: "Serve Cloudflare Images on a custom delivery domain",
             image_url: function(image_name, variant, config) {
                 return config.site_url + "/cdn-cgi/imagedelivery/" + config.cloudflare_images_account_hash + "/" + image_name + "/" + variant;
             }
@@ -40,7 +40,7 @@ module.exports = {
         {
             name: "Step 4",
             path: "/step-4",
-            description: "Use Cloudflare Images without changing your current images URL",
+            description: "Serve Cloudflare Images without changing existing images URL",
             image_url: function(image_name, variant, config) {
                 return config.site_url + "/images/" + variant + "/" + image_name;
             }
