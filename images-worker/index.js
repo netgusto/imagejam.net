@@ -11,29 +11,30 @@ const config = {
   // This is the Images account Hash you'll find in your Cloudflare Images Dashboard
   // It is safe to disclose publicly, as this is not a secret value.
   cloudflare_images_account_hash: "-oMiRxTrr3JCvTMIzx4GvA",
-
-  // This is where your origin images are stored
-  image_origin_baseurl: "https://imagejam.s3.amazonaws.com/",
 }
 
 async function handleRequest(request) {
   const url = new URL(request.url);
 
-  const use_cf_images = parseInt(url.searchParams.get("use_cf_images")) === 1;
   const { variant, imageName } = extractVariant(url);
-
   if (!variant || !imageName) {
     return notFound();
   }
 
-  if (use_cf_images) {
-    // Use Cloudflare Images to deliver image ✨
-    return fetch("https://imagedelivery.net/" + config.cloudflare_images_account_hash + "/" + imageName + "/" + variant);
+  if (url.searchParams.has("use_cf_images") && parseInt(url.searchParams.get("use_cf_images")) === 0) {
+    // Don't use Cloudflare Images 🙈 and serve directly from S3.
+    // Corresponds to a website not (yet!) using Cloudflare Images
+    //
+    // This is supported for illustrative purposes of the tutorial only,
+    // as we need the worker to be able to deliver both original images for step 1,
+    // and Cloudflare Images for step 4.
+    // In a real setup, the worker would serve all traffic on Cloudflare Images,
+    // so this whole condition block could be removed
+    return fetch("https://imagejam.s3.amazonaws.com/" + imageName); 
   }
 
-  // Don't use Cloudflare Images 🙈
-  // corresponds to a website not (yet!) using Cloudflare Images
-  return fetch(config.image_origin_baseurl + imageName); 
+  // Use Cloudflare Images to deliver image ✨
+  return fetch("https://imagedelivery.net/" + config.cloudflare_images_account_hash + "/" + imageName + "/" + variant);
 }
 
 function extractVariant(url) {

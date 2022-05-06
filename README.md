@@ -18,11 +18,11 @@ Step 4 serves Cloudflare Images on their original URLs, **demonstrating that a f
 
 Live at <https://imagejam.net/step-1/>
 
-Presents a website serving images without using Cloudflare Images 🙈
+Presents a website serving unoptimized images (without using Cloudflare Images 🙈).
 
-👉 We use this step as a basis for the integration of Cloudflare Images.
+👉 We use this as a basis for the integration of Cloudflare Images in the following step.
 
-Image URLs look like: https://imagejam.net/images/public/cakes/aliet-kitchen-qrDbj7OV2EU-unsplash-ツ.jpg
+Image URLs look like: https://imagejam.net/images/public/cakes/aliet-kitchen-qrDbj7OV2EU-unsplash-ツ.jpg?use_cf_images=0
 
 ### Step 2: Cloudflare Images width default delivery domain
 
@@ -53,6 +53,10 @@ Presents a website serving images from Cloudflare Images, keeping the Images on 
 👉 Demonstrates how low profile the integration of Cloudflare Images can be in your system, requiring zero change in the HTML of your existing website and in the URLs of your existing images.
 
 👉 This is achieved by a simple Cloudflare Worker that relays image trafic to Cloudflare Images. See the source code for this worker in [`/images-worker`](https://github.com/netgusto/imagejam.net/tree/production/images-worker) on this repo.
+
+Image URLs look like: https://imagejam.net/images/public/cakes/aliet-kitchen-qrDbj7OV2EU-unsplash-ツ.jpg
+
+Note: in Step 1 we added `?use_cf_images=0` to the image URLs for illustrative purposes of the tutorial only, as we need the worker to be able to deliver both original images for step 1, and Cloudflare Images for step 4. In a real setup, the worker would serve all traffic on Cloudflare Images, so this query parameter would not be required.
 
 ## Migrating the website Images to Cloudflare Images
 

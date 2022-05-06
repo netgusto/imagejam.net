@@ -18,7 +18,7 @@ module.exports = {
             path: "/step-1",
             description: "Serve images without Cloudflare Images 🙈",
             image_url: function(image_name, variant, config) {
-                return config.site_url + "/images/" + variant + "/" + image_name;
+                return config.site_url + "/images/" + variant + "/" + image_name + "?use_cf_images=0";
             }
         },
         {
@@ -42,7 +42,7 @@ module.exports = {
             path: "/step-4",
             description: "Use Cloudflare Images without changing your current images URL",
             image_url: function(image_name, variant, config) {
-                return config.site_url + "/images/" + variant + "/" + image_name + "?use_cf_images=1";
+                return config.site_url + "/images/" + variant + "/" + image_name;
             }
         },
     ],
