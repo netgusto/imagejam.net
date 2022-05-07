@@ -34,10 +34,19 @@ async function handleRequest(request) {
   }
 
   // Use Cloudflare Images to deliver image ✨
-  return fetch("https://imagedelivery.net/" + config.cloudflare_images_account_hash + "/" + imageName + "/" + variant);
+  // by cosntructing the CF Images URL with parts extracted from
+  // the original website image URLs that this worker intercepts
+  return fetch("https://imagedelivery.net/" + config.cloudflare_images_account_hash + "/" + imageName + "/" + variant, {
+    // relay request headers to Cloudflare Images,
+    // to inform about the media types accepted by the HTTP client
+    headers: request.headers,
+  });
 }
 
 function extractVariant(url) {
+  // takes website URLs like /images/public/cakes/gateau.jpg
+  // and identifies the variant (here, "public")
+  // and imageName ( here, "cakes/gateau.jpg")
   const parts = url.pathname.replace("/images/", "").split("/");
   const variant = parts.shift();
   return { variant: variant, imageName: parts.join("/") };
