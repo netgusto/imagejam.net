@@ -15,31 +15,52 @@
 
 <script>
     (function () {
-        const img = document.querySelector("#fullimg img");
-        img.addEventListener("load", function() {
-            document.querySelector("#fullimg .details").innerHTML = "Real size: " + img.naturalWidth + "x" + img.naturalHeight + "; display size: " + img.clientWidth + "x" + img.clientHeight;
-        });
 
-        const openFull = (cell) => {
-            const large_img_src = cell.querySelector("img.large").src;
-            img.src = large_img_src;
-            document.querySelector("#fullimg em").innerHTML = '<a href="' + large_img_src + '" target="_blank">' + decodeURI(large_img_src) + '</a>';
-            document.querySelector("#fullimg").style.display = "block";
-            document.querySelector("#gallery").style.display = "none";
-        };
+        const gallery = document.querySelector("#gallery");
 
-        const closeFull = () => {
-            document.querySelector("#fullimg").style.display = "none";
-            document.querySelector("#gallery").style.display = "block";
-            document.querySelector("#fullimg .details").innerHTML = "&nbsp;";
+        <% if(locals.fetchList) { %>
+            const makeImageHTML = (image) => `
+            <div class="gallery-cell" style="background-image: url(${image["thumb"]})">
+                <img src="${image["public"]}" class="large">
+            </div>
+            `;
+            fetch("https://interactive-gallery.confiture.workers.dev/")
+                .then(res => res.json())
+                .then(res => res.map(image => makeImageHTML(image)).join("\n"))
+                .then(galleryHTML => gallery.innerHTML = galleryHTML)
+                .then(() => initGallery())
+                .catch(err => console.error(err));
+        <% } else { %>
+            initGallery();
+        <% } %>
+
+        function initGallery() {
+            const img = document.querySelector("#fullimg img");
+            img.addEventListener("load", function() {
+                document.querySelector("#fullimg .details").innerHTML = "Real size: " + img.naturalWidth + "x" + img.naturalHeight + "; display size: " + img.clientWidth + "x" + img.clientHeight;
+            });
+
+            const openFull = (cell) => {
+                const large_img_src = cell.querySelector("img.large").src;
+                img.src = large_img_src;
+                document.querySelector("#fullimg em").innerHTML = '<a href="' + large_img_src + '" target="_blank">' + decodeURI(large_img_src) + '</a>';
+                document.querySelector("#fullimg").style.display = "block";
+                gallery.style.display = "none";
+            };
+
+            const closeFull = () => {
+                document.querySelector("#fullimg").style.display = "none";
+                gallery.style.display = "block";
+                document.querySelector("#fullimg .details").innerHTML = "&nbsp;";
+            }
+
+            document.querySelectorAll("#gallery .gallery-cell").forEach(img => {
+                img.addEventListener("click", () => openFull(img));
+            });
+
+            document.querySelectorAll("#fullimg a, #fullimg img").forEach(o => {
+                o.addEventListener("click", () => closeFull());
+            });
         }
-
-        document.querySelectorAll("#gallery .gallery-cell").forEach(img => {
-            img.addEventListener("click", () => openFull(img));
-        });
-
-        document.querySelectorAll("#fullimg a, #fullimg img").forEach(o => {
-            o.addEventListener("click", () => closeFull());
-        });
     })();
 </script>

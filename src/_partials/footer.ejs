@@ -3,8 +3,9 @@
 <p><a href="https://developers.cloudflare.com/images/cloudflare-images/tutorials/cloudflare-images-on-pages">Check out the tutorial this website is about</a></p>
 <p>Tutorial steps:
     <% config.steps.forEach(function(step) { %>
-        <a href="<%= step.path %>/<%= pagePath %>"><%= step.name %></a>, 
+        <a href="<%= step.path %>"><%= step.name %></a>, 
     <% }); %>
 </p>
+<p><a href="/step-2/connect">✨ The Cloudflare Connect Gallery ✨</a></p>
 <p><a href="<%= step.path %>/images-credits">Images Credits</a></p>
 </footer>

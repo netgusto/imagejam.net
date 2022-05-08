@@ -8,6 +8,10 @@
 <p><a href="<%= step.path %>/cakes">Check out our cakes 🎂</a></p>
 <p><a href="<%= step.path %>/candies">You won't resist our candies 🍭</a></p>
 <p><a href="<%= step.path %>/jam">Or maybe jelly is more your jam 🍓</a></p>
+<% if (step.path === "/step-2") { %>
+<p><a href="<%= step.path %>/connect">And there's the Cloudflare Connect Gallery</a></p>
+<% } %>
+    
 </main>
 
 <%- include('_partials/footer.ejs') %>
