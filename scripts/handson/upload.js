@@ -13,7 +13,7 @@ const { exit } = require("../migrate/utils");
 // args:
 //
 // --url https://example.com/image.png OR --file path/to/local/file.png
-// [--id somt/custom-image-id.png]
+// [--id some-custom-image-id.png]
 // [--metadata '{"some": "json object"}']
 //
 
