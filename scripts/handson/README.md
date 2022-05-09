@@ -3,11 +3,16 @@
 
 CLI script that uploads images to Cloudflare Images, for display in the <https://imagejam.net/step-2/connect> gallery.
 
+This tool uploads to the [Cloudflare Images API Image Upload endpoint](https://api.cloudflare.com/#cloudflare-images-upload-an-image-using-a-single-http-request)
+via an endpoint proxy hosted on <https://imagejam.net/connect-upload/>.
+
+You don't need a Cloudflare Images Account to use this tool, but an key `CF_IMAGES_EVENT_KEY` provided by the workshop host during the session.
+
 ## Installation
 
-Requires NodeJS and NPM.
+Requires [NodeJS](https://nodejs.org/) 16.15 (LTS) or newest, with NPM.
 
-At the root of the repo:
+At the root of the repo, run:
 
 ```
 npm install
@@ -17,7 +22,7 @@ npm install
 
 The cli requires the variable `CF_IMAGES_EVENT_KEY` to be set in the execution environment.
 
-The value of this variable will provider by the workshop host during the session.
+The value of this variable will be provided by the workshop host during the session.
 
 Set it in your environment like so (linux/mac):
 
@@ -29,17 +34,25 @@ export CF_IMAGES_EVENT_KEY=...
 
 ```sh
 export CF_IMAGES_EVENT_KEY=... # only the first time
-node scripts/handson/upload.js --url https://example.com/image.png [--id some-custom-image-id.png] [--metadata '{"tag": "connect"}']
+node scripts/handson/upload.js \
+    --url https://example.com/image.png \
+    --id some-custom-image-id.png \ # set your custom image ID; optional
+    --metadata '{"tag": "connect"}' # optional
 ```
 
 ### Upload local file
 
 ```sh
 export CF_IMAGES_EVENT_KEY=... # only the first time
-node scripts/handson/upload.js --file path/to/local/file.png [--id some-custom-image-id.png] [--metadata '{"tag": "connect"}']
+node scripts/handson/upload.js \
+    --file path/to/local/file.png \
+    --id some-custom-image-id.png \ # set your custom image ID; optional
+    --metadata '{"tag": "connect"}' # optional
 ```
 
 ## curl Equivalent
+
+If you have `curl` on your setup and would like to use it instead of the provided node script, use these commands instead.
 
 ### Upload by URL
 
@@ -48,8 +61,8 @@ export CF_IMAGES_EVENT_KEY=... # only the first time
 curl -X POST https://imagejam.net/connect-upload/ \
     -H "Authorization: Bearer $CF_IMAGES_EVENT_KEY" \
     --form 'url=https://example.com/image.png' \
-    --form 'id=some-custom-image-id.png' \
-    --form 'metadata={"tag":"connect"}'
+    --form 'id=some-custom-image-id.png' \  # set your custom image ID; optional
+    --form 'metadata={"tag":"connect"}'     # optional
 ```
 
 ### Upload local file
@@ -59,6 +72,6 @@ export CF_IMAGES_EVENT_KEY=... # only the first time
 curl -X POST https://imagejam.net/connect-upload/ \
     -H "Authorization: Bearer $CF_IMAGES_EVENT_KEY" \
     --form 'file=@/path/to/local/file.png' \
-    --form 'id=some-custom-image-id.png' \
-    --form 'metadata={"tag":"connect"}'
+    --form 'id=some-custom-image-id.png' \  # set your custom image ID; optional
+    --form 'metadata={"tag":"connect"}'     # optional
 ```

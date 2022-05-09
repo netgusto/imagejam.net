@@ -108,3 +108,8 @@ npm run serve
 ```
 
 Then open <http://127.0.0.1:8080> in your browser.
+
+## Workshop session Hands-on script
+
+The repo ships with a script in [`scripts/handson`](https://github.com/netgusto/imagejam.net/tree/production/scripts/handson)
+used to upload images on Cloudflare Images, for display in the gallery <https://imagejam.net/step-2/connect/>.
