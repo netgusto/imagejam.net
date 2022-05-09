@@ -71,7 +71,7 @@
                 document.querySelector("#gallery").style.display = "none";
 
                 document.querySelectorAll("#fullimg img").forEach(img => img.addEventListener("load", function(e) {
-                    img.parentNode.querySelector("em").innerHTML = escapeAttr(decodeURI(img.src));
+                    img.parentNode.querySelector("a.url").innerHTML = escapeAttr(decodeURI(img.src));
                     img.parentNode.querySelector(".details").innerHTML = "Real size: " + img.naturalWidth + "x" + img.naturalHeight + "; display size: " + img.clientWidth + "x" + img.clientHeight;
                 }));
 
