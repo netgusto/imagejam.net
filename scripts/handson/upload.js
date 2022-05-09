@@ -1,9 +1,3 @@
-// TODO: js code to upload on https://imagejam.net/connect-upload
-
-// take either --url or --file
-// take optional --id
-// take --metadata
-
 const path = require("path");
 const fs = require('fs')
 const fetch = require("node-fetch");
@@ -11,17 +5,22 @@ const FormData = require("form-data");
 const yargs = require("yargs/yargs");
 const { hideBin } = require("yargs/helpers");
 
-const { readLineAsync, exit } = require("../migrate/utils");
+const { exit } = require("../migrate/utils");
+
+//
+// Cloudflare Image Upload cli for https://imagejam.net/step-2/connect
+//
+// args:
+//
+// --url https://example.com/image.png OR --file path/to/local/file.png
+// [--id somt/custom-image-id.png]
+// [--metadata '{"some": "json object"}']
+//
 
 async function upload({ url, file, id, metadata }) {
     const { CF_IMAGES_EVENT_KEY } = process.env;
     if (!CF_IMAGES_EVENT_KEY) {
         exit("Please set CF_IMAGES_EVENT_KEY in the environment");
-    }
-
-    const answer = await readLineAsync("Proceed with single upload to Cloudflare Images ? yes/[no]: ");
-    if (answer !== "yes") {
-        exit("doing nothing");
     }
 
     const body = new FormData();

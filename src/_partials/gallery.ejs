@@ -1,27 +1,39 @@
 <div id="gallery">
     <% images.forEach(function(image) { %>
-    <div class="gallery-cell" style="background-image: url(<%= step.image_url(image, 'thumb', config) %>);">
-        <img src="<%= step.image_url(image, 'public', config) %>" class="large">
+    <div class="gallery-cell" style="background-image: url(<%= step.image_url(image, 'thumb', config) %>);"
+        <% if (step.path === "/step-2" || step.path === "/step-3" || step.path === "/step-4") { %>
+        x-images="<%= JSON.stringify([
+            step.image_url(image, 'public', config),
+            step.image_url(image, 'width=600,height=600,blur=30,fit=cover,gravity=auto', config)
+        ]) %>"
+        <% } else { %>
+        x-images="<%= JSON.stringify([step.image_url(image, 'public', config)])%>"
+        <% } %>
+    >
+        <img src="<%= step.image_url(image, 'public', config) %>" style="display: none" />
+        <% if (step.path === "/step-2" || step.path === "/step-3" || step.path === "/step-4") { %>
+            <img src="<%= step.image_url(image, 'width=600,height=600,blur=30,fit=cover,gravity=auto', config) %>" style="display: none" />
+        <% } %>        
     </div>
     <% }); %>
 </div>
 
 <div id="fullimg">
-    <em></em>
-    <div class="details"></div>
-    <img />
-    <a href="#">Close</a>
+    <a href="#" class="close">Close</a>
+    <div class="imgs"></div>
 </div>
 
 <script>
     (function () {
 
-        const gallery = document.querySelector("#gallery");
-
         <% if(locals.fetchList) { %>
             const makeImageHTML = (image) => `
-            <div class="gallery-cell" style="background-image: url(${image["thumb"]})">
-                <img src="${image["public"]}" class="large">
+            <div class="gallery-cell" style="background-image: url(${image["thumb"]})" x-images="${escapeAttr(JSON.stringify([
+                image["public"],
+                image["blur"],
+            ]))}">
+                <img src="${escapeAttr(image["public"])}" style="display: none;">
+                <img src="${escapeAttr(image["blur"])}" style="display: none;">
             </div>
             `;
             fetch("https://interactive-gallery.confiture.workers.dev/")
@@ -34,16 +46,65 @@
             initGallery();
         <% } %>
 
+        function escapeAttr(str) {
+            return str.replaceAll(/"/g, "&#34;").replaceAll(/'/g, "&#39;").replaceAll(/</g, "&#x3C;").replaceAll(/>/g, "&#x3E;");
+        }
+
+        function html_for_variant(url) {
+            return `<div class="img-unit"><a class="url" href="${escapeAttr(url)}" target="_blank">${escapeAttr(url)}</a><div class="details"></div><img src="${escapeAttr(url)}" class="large" /></div>`;
+        }
+
         function initGallery() {
-            const img = document.querySelector("#fullimg img");
-            img.addEventListener("load", function() {
-                document.querySelector("#fullimg .details").innerHTML = "Real size: " + img.naturalWidth + "x" + img.naturalHeight + "; display size: " + img.clientWidth + "x" + img.clientHeight;
+
+            const closeFull = () => {
+                document.querySelector("#fullimg").style.display = "none";
+                document.querySelector("#gallery").style.display = "block";
+                document.querySelector("#fullimg .details").innerHTML = "&nbsp;";
+            }
+
+            function openFull(img) {
+                const imageURLs = JSON.parse(img.getAttribute("x-images"));
+                const imagesHTML = imageURLs.map(html_for_variant);
+
+                document.querySelector("#fullimg div.imgs").innerHTML = imagesHTML.join("\n");
+                document.querySelector("#fullimg").style.display = "block";
+                document.querySelector("#gallery").style.display = "none";
+
+                document.querySelectorAll("#fullimg img").forEach(img => img.addEventListener("load", function(e) {
+                    img.parentNode.querySelector("em").innerHTML = escapeAttr(decodeURI(img.src));
+                    img.parentNode.querySelector(".details").innerHTML = "Real size: " + img.naturalWidth + "x" + img.naturalHeight + "; display size: " + img.clientWidth + "x" + img.clientHeight;
+                }));
+
+                document.querySelectorAll("#fullimg a.close, #fullimg img").forEach(o => {
+                    o.addEventListener("click", () => closeFull());
+                });
+            }
+
+            document.querySelectorAll("#gallery .gallery-cell").forEach(img => {
+                img.addEventListener("click", () => openFull(img));
             });
+        }
+
+        /*
+        const gallery = document.querySelector("#gallery");
+
+        function initGallery() {
 
             const openFull = (cell) => {
-                const large_img_src = cell.querySelector("img.large").src;
-                img.src = large_img_src;
-                document.querySelector("#fullimg em").innerHTML = '<a href="' + large_img_src + '" target="_blank">' + decodeURI(large_img_src) + '</a>';
+
+                const large_imgs = [];
+                cell.querySelectorAll("img.large").forEach(large_img => {
+                    large_imgs.push(large_img.outerHTML);
+                });
+
+                document.querySelector("#fullimg div.imgs").innerHTML = large_imgs.join("\n");
+                const img = document.querySelector("#fullimg img");
+                img.addEventListener("load", function() {
+                    document.querySelector("#fullimg .details").innerHTML = "Real size: " + img.naturalWidth + "x" + img.naturalHeight + "; display size: " + img.clientWidth + "x" + img.clientHeight;
+                });
+
+                // img.src = large_img_src;
+                // document.querySelector("#fullimg em").innerHTML = '<a href="' + large_img_src + '" target="_blank">' + decodeURI(large_img_src) + '</a>';
                 document.querySelector("#fullimg").style.display = "block";
                 gallery.style.display = "none";
             };
@@ -62,5 +123,6 @@
                 o.addEventListener("click", () => closeFull());
             });
         }
+        */
     })();
 </script>

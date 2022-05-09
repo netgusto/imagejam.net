@@ -38,6 +38,7 @@ a {
     background-size: cover;
     display: inline-block;
     cursor: pointer;
+    margin: 6px 4px;
 }
 
 #fullimg {
@@ -56,10 +57,14 @@ a {
     margin: 0 auto;
 }
 
-#fullimg em {
+#fullimg a.url {
     font-style: normal;
     color: #F48120;
     padding-bottom: 20px;
+}
+
+#fullimg .img-unit {
+    margin-bottom: 30px;
 }
 
 #gallery img.large {
