@@ -11,9 +11,6 @@
         <% } %>
     >
         <img src="<%= step.image_url(image, 'public', config) %>" style="display: none" />
-        <% if (step.path === "/step-2" || step.path === "/step-3" || step.path === "/step-4") { %>
-            <img src="<%= step.image_url(image, 'width=600,height=600,blur=30,fit=cover,gravity=auto', config) %>" style="display: none" />
-        <% } %>        
     </div>
     <% }); %>
 </div>
