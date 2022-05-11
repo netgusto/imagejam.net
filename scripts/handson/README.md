@@ -6,7 +6,7 @@ CLI script that uploads images to Cloudflare Images, for display in the <https:/
 This tool uploads to the [Cloudflare Images API Image Upload endpoint](https://api.cloudflare.com/#cloudflare-images-upload-an-image-using-a-single-http-request)
 via an endpoint proxy hosted on <https://imagejam.net/connect-upload/>.
 
-You don't need a Cloudflare Images Account to use this tool, but an key `CF_IMAGES_EVENT_KEY` provided by the workshop host during the session.
+To use this tool, you don't need a Cloudflare Images Account. The required key `CF_IMAGES_EVENT_KEY` will be provided by the workshop host during the session.
 
 ## Installation
 
