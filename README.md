@@ -78,7 +78,7 @@ export CF_IMAGES_ACCOUNT_ID=...
 # See https://developers.cloudflare.com/api/tokens/create/
 export CF_IMAGES_API_KEY=...
 
-npm run bulkupload
+npm run migrate:bulkupload
 ```
 
 Once done, the website original images have been imported on Cloudflare Images.
